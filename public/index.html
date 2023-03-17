@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Chat Chef</title>
+  </head>
+  <body>
+    <div class="container">
+        <header class="bot_title_div">
+            <img src="./image/chef_chat.png" alt="a food logo">
+            <h2>Chef Chat</h2>
+        </header>
+      <div class="chat_window"></div>
+      <form action="" class="chat_form">
+        <input
+          type="text"
+          class="chat_input"
+          autocomplete="off"
+          autofocus
+          placeholder="Enter your preferred choice"
+        />
+        <button class="chat_input_btn" type="submit"> <i class="fa-solid fa-paper-plane fa-rotate-45 icon"></i></i></button>
+      </form>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
