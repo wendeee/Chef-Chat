@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
+// const MongoStore = require("connect-mongo");
 const { Server } = require("socket.io");
 const MenuList = require("../menu_list.json");
 
@@ -11,9 +11,9 @@ const sessionMiddleware = session({
   secret: process.env.SESSION_SECRET_KEY,
   resave: false,
   saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl: process.env.MONGO_URL }),
-  ttl: 1 * 24 * 60 * 60, // = 1day
-  autoRemove: "native", // Default
+  // store: MongoStore.create({ mongoUrl: process.env.MONGO_URL }),
+  // ttl: 1 * 24 * 60 * 60, // = 1day
+  // autoRemove: "native", // Default
 });
 app.use(sessionMiddleware);
 app.use(express.static("public"));
