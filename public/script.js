@@ -1,4 +1,5 @@
 let socket = io();
+
 const chatWindow = document.querySelector(".chat_window");
 const chatForm = document.querySelector(".chat_form");
 const chatInput = document.querySelector(".chat_input");
