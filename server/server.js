@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const session = require("express-session");
-// const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo");
 const { Server } = require("socket.io");
 const MenuList = require("../menu_list.json");
 
@@ -11,9 +11,9 @@ const sessionMiddleware = session({
   secret: process.env.SESSION_SECRET_KEY,
   resave: false,
   saveUninitialized: true,
-  // store: MongoStore.create({ mongoUrl: process.env.MONGO_URL }),
-  // ttl: 1 * 24 * 60 * 60, // = 1day
-  // autoRemove: "native", // Default
+  store: MongoStore.create({mongoUrl: process.env.MONGO_URL}),
+  ttl: 1 * 24 * 60 * 60, // = 1day
+  autoRemove: "native", // Default
 });
 app.use(sessionMiddleware);
 app.use(express.static("public"));
@@ -23,14 +23,27 @@ const io = new Server(server, {
 
 // convert a connect middleware to a Socket.IO middleware
 const wrap = (middleware) => (socket, next) =>
-  middleware(socket.request, {}, next);
+  middleware(socket.request, socket.request.res || {}, next);
 io.use(wrap(sessionMiddleware));
+
+
 io.on("connection", (socket) => {
+
+// //   // Get the session ID from the client
+//  const sessionId = socket.handshake.headers.cookie.split('=')[2];
+//  // Set the session ID on the socket object
+//  socket.sessionId = sessionId;
+
+ 
+ 
   //keep track of session using user's device
   const userDevice = socket.request.headers["user-agent"];
+  socket.request.session.user = userDevice;
   if (userDevice) {
-    console.log(`user ${socket.id} connected`);
+    
+    // console.log(`user ${socket.id} connected`);
     socket.request.session.save();
+  
   }
 
   //track user's current order
@@ -143,7 +156,7 @@ io.on("connection", (socket) => {
         );
         break;
     }
-  });
+    });
   socket.on("disconnect", () => {
     console.log(`user ${socket.id} disconnected`);
   });
