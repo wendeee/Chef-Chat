@@ -122,8 +122,6 @@ npm run dev
 
 - Twitter - [@\_ChinwenduE](https://twitter.com/_ChinwenduE)
 
-- Email - chinwe.promise2016@gmail.com
-
 Project Link: [https://github.com/wendeee/Chef-Chat](https://github.com/wendeee/Chef-Chat)
 
 <!-- MARKDOWN LINKS & IMAGES -->
